@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "IrfEx Dashboard",
@@ -18,8 +19,11 @@ export default function RootLayout({
       <body>
         <SidebarProvider>
           <AppSidebar />
-          <main>
+          <main className="w-full">
+            <header className="h-[50px] p-4 flex items-center bg-slate-200 w-full">
             <SidebarTrigger />
+            <Image src={"/irfexlogo.png"} alt="logo" height={80} width={100} />
+            </header>
             {children}
           </main>
         </SidebarProvider>
