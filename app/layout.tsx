@@ -20,7 +20,7 @@ export default function RootLayout({
         <SidebarProvider>
           <AppSidebar />
           <main className="w-full">
-            <header className="h-[50px] p-4 flex items-center bg-slate-200 w-full">
+            <header className="h-[50px] p-4 flex items-center bg-slate-100 w-full">
             <SidebarTrigger />
             <Image src={"/irfexlogo.png"} alt="logo" height={80} width={100} />
             </header>
