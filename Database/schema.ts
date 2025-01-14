@@ -1,9 +1,12 @@
-import { date, integer, pgTable, text, varchar } from "drizzle-orm/pg-core";
+import { date, integer, pgTable, text, time, varchar } from "drizzle-orm/pg-core";
 
 export const pnr = pgTable('pnr', {
     pnr: varchar('pnr', { length: 10 }).primaryKey().notNull(), 
     dob: date('dob').notNull(), 
     doj: date('doj').notNull(),
+    timedep : time('timedep').notNull(),
+    timearr : time('timearr').notNull(),
+    airlines : text('airlines').notNull(),
     depurture: text('depurture').notNull(),
     arrival: text('arrival').notNull(),
     cost : integer('cost'),
