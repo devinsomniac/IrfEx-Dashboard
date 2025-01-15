@@ -2,93 +2,119 @@
 
 import * as React from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
-
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
 } from "@/components/ui/command"
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from "@/components/ui/popover"
+import { Input } from "./ui/input"
 
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-]
 
+type Airport = {
+    value: string;
+    label: string;
+    id : number;
+};
 export function SelectDepAirport() {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+    const BASE_URL = "https://airport-info.p.rapidapi.com/airport?iata="
+    const [open, setOpen] = React.useState(false)
+    const [value, setValue] = React.useState("")
+    const [airports, setAirports] = React.useState<Airport[]>([])
+    const [userInput, setUserInput] = React.useState("")
+    const [loading, setLoading] = React.useState(false)
 
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-[200px] justify-between"
-        >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput placeholder="Search framework..." />
-          <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
-            <CommandGroup>
-              {frameworks.map((framework) => (
-                <CommandItem
-                  key={framework.value}
-                  value={framework.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
-                  }}
+
+    React.useEffect(() => {
+
+        const fetchAirportDetails = async () => {
+            try {
+                setLoading(true)
+                const resposne = await fetch(`${BASE_URL}${userInput}`, {
+                    method: "GET",
+                    headers: {
+                        'x-rapidapi-key': 'aecacb131amsha3ba44f12a43c06p1fdd0djsn7fa0df85e770',
+                        'x-rapidapi-host': 'airport-info.p.rapidapi.com'
+                    }
+                })
+                if (!resposne) {
+                    throw new Error("There hjas been an error")
+                }
+                const data = await resposne.json()
+                setAirports([
+                    {
+                        value: data.iata,
+                        label: data.name,
+                        id : data.id
+                    },
+                ]);
+            } catch (err) {
+                console.log("There hs been error", err)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchAirportDetails()
+    }, [userInput])
+    return (
+        <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+                <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={open}
+                    className="w-[200px] justify-between overflow-hidden"
                 >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === framework.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                  {framework.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  )
+                    {value
+                        ? airports.find((airport) => airport.value === value)?.label
+                        : "Select Airport..."}
+                    <ChevronsUpDown className="opacity-50" />
+                </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+                <Command>
+                    <Input placeholder="Search For Airport" className="h-9" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserInput(e.target.value)} />
+                    <CommandList>
+                        
+                        {userInput && 
+                        <>
+                        <CommandEmpty>{!loading && "No Airport Found"}</CommandEmpty>
+                        <CommandGroup className="flex justify-center items-center">
+                            {loading ? <AiOutlineLoading3Quarters className="animate-spin" /> :
+                                airports.map((airport) => (
+                                    <CommandItem
+                                        key={airport.id}
+                                        value={airport.value}
+                                        onSelect={(currentValue) => {
+                                            setValue(currentValue === value ? "" : currentValue)
+                                            setOpen(false)
+                                        }}
+                                    >
+                                        {airport.label}
+                                        <Check
+                                            className={cn(
+                                                "ml-auto",
+                                                value === airport.value ? "opacity-100" : "opacity-0"
+                                            )}
+                                        />
+                                    </CommandItem>
+                                ))}
+                        </CommandGroup>
+                        </>
+                        }
+                    </CommandList>
+                </Command>
+            </PopoverContent>
+        </Popover>
+    )
 }
