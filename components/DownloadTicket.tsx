@@ -1,6 +1,8 @@
-"use client"
+"use client"; // Mark this as a Client Component
+
 import React from 'react';
-import puppeteer from 'puppeteer';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { Button } from './ui/button';
 
 const DownloadButton = () => {
@@ -8,33 +10,20 @@ const DownloadButton = () => {
         const element = document.getElementById('ticket'); // Select the div with id 'ticket'
         if (!element) return;
 
-        // Launch Puppeteer
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
+        const canvas = await html2canvas(element, { scale: 2 }); // Higher scale for better quality
+        const imgData = canvas.toDataURL('image/png');
 
-        // HTML content to be printed
-        await page.setContent(element.outerHTML);
+        const pdf = new jsPDF({
+            orientation: 'portrait', // A4 orientation
+            unit: 'mm',
+            format: 'a4',
+        });
 
-        // Set the desired PDF dimensions and options
-        const pdfOptions = {
-            format : 'A4', // Corrected to use predefined PaperFormat
-            printBackground: true,
-        };
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
 
-        // Generate the PDF
-        const pdf = await page.pdf(pdfOptions);
-
-        // Close the browser
-        await browser.close();
-
-        // Trigger the download
-        const pdfBlob = new Blob([pdf], { type: 'application/pdf' });
-        const pdfUrl = URL.createObjectURL(pdfBlob);
-        const link = document.createElement('a');
-        link.href = pdfUrl;
-        link.download = 'ticket.pdf';
-        link.click();
-        URL.revokeObjectURL(pdfUrl);
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('ticket.pdf'); // Save the PDF with the desired filename
     };
 
     return <Button onClick={handleDownload} className="btn btn-primary">Download</Button>;

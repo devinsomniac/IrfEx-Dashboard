@@ -28,11 +28,11 @@ const page = () => {
                     </div>
                     <Image src={'/irfexlogo.png'} alt='logo' height={50} width={120} />
                 </div>
-                <Separator className='bg-gray-500 my-2' />
+                <Separator className='bg-gray-500 mt-2' />
                 {/* Sub heading with destinantion and arrival */}
                 <div className='flex gap-2 items-end'>
-                    <h2 className='font-bold text-[15px]'>Kolkata to Prayagraj</h2>
-                    <h2 className="text-[10px]">Tue, 14 jan 2025</h2>
+                    <h2 className='font-bold text-[15px] mb-0 mt-0'>Kolkata to Prayagraj</h2>
+                    <h2 className="text-[10px] mt-0 mb-0">Tue, 14 jan 2025</h2>
                 </div>
                 <Separator className='bg-gray-500 my-2' />
                 {/* Itinerary Details */}
@@ -42,78 +42,76 @@ const page = () => {
                         {/* <Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLIEyJ-EYgoHpuFHPKfA4Qr4BqkDChWRbjsQ&s"} alt='Airline Logo' height={50} width={60} /> */}
 
                         {/* Flight name number and fare type */}
-                        <h2>Indigo</h2>
-                        <p>6E - 2309</p>
-                        <p>Fare type : Standard</p>
+                        <h2 className="mb-0">Indigo</h2>
+                        <p className="mb-0">6E - 2309</p>
+                        <p className="mb-0">Fare type : Standard</p>
                     </div>
                     {/* Depurture IATA,time ,Date, Airport Address */}
                     <div>
-                        <h2>CCU <span className='font-bold'>16:10</span></h2>
-                        <p className='text-gray-500 text-[10px]'>Tue, 14 Jan 2025</p>
-                        <p className='text-gray-500 text-[10px]'>Kolkata - Netaji Subhas Chandra Bose Airport</p>
+                        <h2 className="mb-0">CCU <span className='font-bold'>16:10</span></h2>
+                        <p className='text-gray-500 text-[10px] mb-0'>Tue, 14 Jan 2025</p>
+                        <p className='text-gray-500 text-[10px] mb-0'>Kolkata - Netaji Subhas Chandra Bose Airport</p>
                     </div>
                     {/* Duration and economy */}
                     <div className="flex flex-col items-center text-sm">
                         <FaRegClock />
-                        <p className="text-[10px]">1 hr 30 mins</p>
-                        <p className="text-[10px]">Economy</p>
+                        <p className="text-[10px] mb-0">1 hr 30 mins</p>
+                        <p className="text-[10px] mb-0">Economy</p>
                     </div>
                     {/* Arrival IATA, time, Date Airport Address */}
                     <div>
-                        <h2><span className="font-bold">17:40</span> IXD</h2>
-                        <p className='text-gray-500 text-[10px]'>Tue, 14 Jan 2025</p>
-                        <p className='text-gray-500 text-[10px]'>Prayagraj - Allahabad</p>
+                        <h2 className="mb-0"><span className="font-bold ">17:40</span> IXD</h2>
+                        <p className='text-gray-500 text-[10px] mb-0'>Tue, 14 Jan 2025</p>
+                        <p className='text-gray-500 text-[10px] mb-0'>Prayagraj - Allahabad</p>
                     </div>
                 </div>
-                <Separator className='bg-gray-500 my-2' />
+                <Separator className='bg-gray-500 mt-2' />
                 {/* Passenger Details */}
                 <div>
                     <Table>
-                        <TableCaption className="text-[8px]">A list of Passengers Travelling</TableCaption>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className="text-[12px] w-[400px] border-r-2">Travellers</TableHead>
-                                <TableHead className="text-[12px] border-r-2">Airline PNR</TableHead>
-                                <TableHead className="text-[12px] border-r-2">Ticket Number</TableHead>
+                        <TableCaption className="text-[8px] mt-0 mb-0 text-center">A list of Passengers Travelling</TableCaption>
+                        <TableHeader className="mb-0">
+                            <TableRow className="mb-0">
+                                <TableHead className="text-[12px] w-[400px] border-r-2 mb-0">Travellers</TableHead>
+                                <TableHead className="text-[12px] border-r-2 mb-0">PNR</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            <TableRow>
-                                <TableCell className="font-bold text-[10px] flex gap-2 items-center border-r-2">
+                            <TableRow className="mb-0">
+                                <TableCell className="mb-0 mt-0 font-bold text-[10px] flex gap-2 items-center border-r-2">
                                 <FaUserLarge />
-                                <p>Mr HRIDOY CHANDRA DAS</p>
+                                <p className="mb-0 mt-0">Mr HRIDOY CHANDRA DAS</p>
                                 </TableCell>
-                                <TableCell className="font-bold text-[10px] border-r-2">ZZSNYF</TableCell>
-                                <TableCell className="font-bold text-[10px] border-r-2">ZZSNYF</TableCell>
+                                <TableCell className="font-bold text-[10px] border-r-2 mb-0">ZZSNYF</TableCell>
+                                
                             </TableRow>
                             <TableRow>
-                                <TableCell className="font-bold text-[10px] flex gap-2 items-center border-r-2">
+                                <TableCell className="mb-0 mt-0 font-bold text-[10px] flex gap-2 items-center border-r-2">
                                 <FaUserLarge />
-                                <p>Mr SAWPAN CHANDRA DASH</p>
+                                <p className="mb-0 mt-0">Mr SAWPAN CHANDRA DASH</p>
                                 </TableCell>
-                                <TableCell className="font-bold text-[10px] border-r-2">ZZSNYF</TableCell>
-                                <TableCell className="font-bold text-[10px] border-r-2">ZZSNYF</TableCell>
+                                <TableCell className="mb-0 font-bold text-[10px] border-r-2">ZZSNYF</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
                 </div>
                 {/* Tip */}
-                <Separator className='bg-gray-500 my-2' />
-                <p className="text-xs">Tip : Dress in layers. Planes are often too hot or too cold.</p>
-                <Separator className='bg-gray-500 my-2' />
+                <Separator className='bg-gray-500  mb-0 mt-0' />
+                <p className="text-[8px] mb-0 mt-0">Tip : Dress in layers. Planes are often too hot or too cold.</p>
+                <Separator className='bg-gray-500  mt-1' />
                 {/* Some Notes */}
                 <div>
                     <h2 className="font-bold">Please Note:</h2>
                     <ul className="list-disc ml-4 text-[8px] text-gray-600">
-                        <li className="pt-1">Check-in Timing: Please arrive at the airport at least 2-3 hours prior to departure for international flights and 1-2 hours for domestic flights.</li>
-                        <li className="pt-1">Baggage Allowance: Ensure your luggage complies with the airline's baggage policy. Additional charges may apply for excess baggage.</li>
-                        <li className="pt-1">Valid Identification: Carry a valid government-issued photo ID or passport for verification at check-in and boarding.</li>
-                        <li className="pt-1">Prohibited Items: Review the list of prohibited items for both carry-on and checked baggage to ensure compliance with security regulations.</li>
-                        <li className="pt-1">Boarding Pass: Keep your boarding pass handy throughout your journey. You may need it for security checks and boarding the flight.</li>
-                        <li className="pt-1">Electronic Devices: Switch off or enable flight mode on all electronic devices during the flight as instructed by the cabin crew.</li>    
-                        <li className="pt-1">Gate Closure: Boarding gates typically close 20-30 minutes before the scheduled departure time. Late arrivals may not be allowed to board.</li>
-                        <li className="pt-1">Health & Safety: Follow all health and safety guidelines provided by the airline and airport authorities, including wearing a mask if required.</li>
-                        <li className="pt-1">Emergency Contact: Keep the airline's customer service number and emergency contacts accessible for assistance during your journey.</li>
+                        <li className="pt-1 mb-0">Check-in Timing: Please arrive at the airport at least 2-3 hours prior to departure for international flights and 1-2 hours for domestic flights.</li>
+                        <li className="pt-1 mb-0">Baggage Allowance: Ensure your luggage complies with the airline's baggage policy. Additional charges may apply for excess baggage.</li>
+                        <li className="pt-1 mb-0">Valid Identification: Carry a valid government-issued photo ID or passport for verification at check-in and boarding.</li>
+                        <li className="pt-1 mb-0">Prohibited Items: Review the list of prohibited items for both carry-on and checked baggage to ensure compliance with security regulations.</li>
+                        <li className="pt-1 mb-0">Boarding Pass: Keep your boarding pass handy throughout your journey. You may need it for security checks and boarding the flight.</li>
+                        <li className="pt-1 mb-0">Electronic Devices: Switch off or enable flight mode on all electronic devices during the flight as instructed by the cabin crew.</li>    
+                        <li className="pt-1 mb-0">Gate Closure: Boarding gates typically close 20-30 minutes before the scheduled departure time. Late arrivals may not be allowed to board.</li>
+                        <li className="pt-1 mb-0">Health & Safety: Follow all health and safety guidelines provided by the airline and airport authorities, including wearing a mask if required.</li>
+                        <li className="pt-1 mb-0">Emergency Contact: Keep the airline's customer service number and emergency contacts accessible for assistance during your journey.</li>
                     </ul>
                 </div>
                 {/* Fare Breakup */}
@@ -141,17 +139,12 @@ const page = () => {
                     </div>
                 </div> */}
                 {/* Agent Contact */}
-                <div className="flex gap-2 items-center border border-b-2 border-black p-4">
-                <MdHelp />
-                <p className="font-bold">Need Help? Call +8801711325022</p>
+                <div className="flex gap-2 items-center border border-b-2 border-black p-2">
+                <p className="font-bold mb-0 mt-0 flex gap-1 items-center"><MdHelp /> Need Help? Call +8801711325022</p>
                 </div>
-                <div className="flex gap-2 items-center border border-b-2 border-black p-4">
-                <MdHelp />
-                <p className="font-bold">Need Help? Call +8801711325022</p>
-                </div>
-                <div className="flex gap-2 items-center border border-b-2 border-black p-4">
-                <MdHelp />
-                <p className="font-bold">Need Help? Call +8801711325022</p>
+                {/* Banner */}
+                <div className="flex justify-center">
+                    <Image src={'/banner.png'} alt="banner" height={200} width={400}/>
                 </div>
             </div>
             <div className="flex justify-center p-2">
