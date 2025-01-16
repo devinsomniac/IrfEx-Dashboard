@@ -18,6 +18,7 @@ import DownloadButton from "@/components/DownloadTicket";
 
 const page = () => {
     return (
+        <>
         <div className='p-10 flex justify-center'>
             <div id='ticket' className='w-[595px] h-[842px] p-8  border border-black'>
                 {/* Headong and logo */}
@@ -147,11 +148,13 @@ const page = () => {
                     <Image src={'/banner.png'} alt="banner" height={200} width={400}/>
                 </div>
             </div>
-            <div className="flex justify-center p-2">
+           
+        </div>
+        <div className="flex justify-center p-2">
             <DownloadButton/>
             </div>
             
-        </div>
+        </>
     )
 }
 
