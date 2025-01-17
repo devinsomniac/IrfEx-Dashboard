@@ -21,7 +21,7 @@ const page = () => {
   const [flightNo,setFlightNo] = useState("")
   const [transit,setTransit] = useState<{transit : boolean,place : string}>({transit : false,place : ""})
   const [flightDuration,setFlightDuration] = useState("")
-  const [passengers,setPassengers] = useState([""])
+  const [passengers,setPassengers] = useState<string[]>([""])
   const handleDepAir = (airport : {name : string,address : string}) => {
     setDepAir(airport)
   }
@@ -52,8 +52,11 @@ const page = () => {
   const handleTransit = (transitInfo : {transit : boolean,place : string}) => {
     setTransit(transitInfo)
   }
-  console.log(depAir)
-  console.log(arrAir)
+
+  const handlePassenger = (passengers : string[]) => {
+    setPassengers(passengers)
+  }
+  console.log(passengers)
   return (
     <div className='p-12 flex flex-col items-center justify-center' style={{
       backgroundImage: `url('/bg.jpg')`,
@@ -109,7 +112,7 @@ const page = () => {
         <Separator className='my-2' />
         <h3 className='font-semibold text-2xl my-1'>Passenger Details</h3>
         <div>
-          <PassengerList/>
+          <PassengerList handlePassengerlist = {handlePassenger}/>
         </div>
         <div className='flex justify-end'>
         <Button type='submit'>
