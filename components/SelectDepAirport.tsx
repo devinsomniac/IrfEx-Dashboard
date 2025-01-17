@@ -9,7 +9,7 @@ import {
     Command,
     CommandEmpty,
     CommandGroup,
-    CommandInput,
+    CommandInput, 
     CommandItem,
     CommandList,
 } from "@/components/ui/command"
@@ -25,8 +25,9 @@ type Airport = {
     value: string;
     label: string;
     id : number;
+    Address : string
 };
-export function SelectDepAirport() {
+export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport : {name : string,address : string}) => void}) {
     const BASE_URL = "https://airport-info.p.rapidapi.com/airport?iata="
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
@@ -55,7 +56,8 @@ export function SelectDepAirport() {
                     {
                         value: data.iata,
                         label: data.name,
-                        id : data.id
+                        id : data.id,
+                        Address : data.location
                     },
                 ]);
             } catch (err) {
@@ -98,6 +100,7 @@ export function SelectDepAirport() {
                                         onSelect={(currentValue) => {
                                             setValue(currentValue === value ? "" : currentValue)
                                             setOpen(false)
+                                            onSelectDepAir({name : airport.label,address : airport.Address})
                                         }}
                                     >
                                         {airport.label}

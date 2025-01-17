@@ -1,4 +1,4 @@
-import { date, integer, pgTable, text, time, varchar } from "drizzle-orm/pg-core";
+import { boolean, date, integer, pgTable, text, time, varchar } from "drizzle-orm/pg-core";
 
 export const pnr = pgTable('pnr', {
     pnr: varchar('pnr', { length: 10 }).primaryKey().notNull(), 
@@ -11,7 +11,9 @@ export const pnr = pgTable('pnr', {
     arrival: text('arrival').notNull(),
     cost : integer('cost'),
     markup : integer('marup'),
-    portal : text('portal')
+    portal : text('portal'),
+    transit : boolean('transit'),
+    transitairport : text('transitairport')
 });
 
 export const passenger = pgTable('passenger',{

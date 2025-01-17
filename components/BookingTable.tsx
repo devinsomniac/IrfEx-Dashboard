@@ -21,7 +21,6 @@ const BookingTable = () => {
       <TableHead>Date of Journey</TableHead>
       <TableHead>Depurture Airport</TableHead>
       <TableHead>Arrival Airport</TableHead>
-      <TableHead>PNR</TableHead>
       <TableHead>Costing</TableHead>
       <TableHead>Markup</TableHead>
       <TableHead>Portal</TableHead>

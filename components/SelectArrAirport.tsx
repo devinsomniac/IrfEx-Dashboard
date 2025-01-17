@@ -25,8 +25,9 @@ type Airport = {
     value: string;
     label: string;
     id : number;
+    address : string;
   };
-export function SelectArrAirport() {
+export function SelectArrAirport({onSelectArrAir} : {onSelectArrAir : (airport : {name : string,address : string}) => void}) {
     const BASE_URL = "https://airport-info.p.rapidapi.com/airport?iata="
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
@@ -52,6 +53,7 @@ export function SelectArrAirport() {
                   value: data.iata,
                   label: data.name, 
                   id : data.id,
+                  address : data.location
                 },
               ]);
         }
@@ -85,6 +87,7 @@ export function SelectArrAirport() {
                                     onSelect={(currentValue) => {
                                         setValue(currentValue === value ? "" : currentValue)
                                         setOpen(false)
+                                        onSelectArrAir({name : airport.label,address : airport.address})
                                     }}
                                 >
                                     {airport.label}

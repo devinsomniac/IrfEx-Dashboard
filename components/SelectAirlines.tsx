@@ -7,7 +7,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-const SelectAirlines = () => {
+const SelectAirlines = ({onSelectAirline} : {onSelectAirline : (airline : string) => void}) => {
     const airlines = [
         {
             name: "Indigo",
@@ -79,7 +79,7 @@ const SelectAirlines = () => {
                 </SelectTrigger>
                 <SelectContent>
                     {airlines.map((airline, index) => (
-                        <SelectItem key={index} value={airline.name}>{airline.name}</SelectItem>
+                        <SelectItem onClick={(e) => {onSelectAirline(airline.name)}} key={index} value={airline.name}>{airline.name}</SelectItem>
                     ))}
                 </SelectContent>
             </Select>

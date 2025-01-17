@@ -54,10 +54,11 @@ const page = () => {
                         <p className='text-gray-500 text-[10px] mb-0'>Kolkata - Netaji Subhas Chandra Bose Airport</p>
                     </div>
                     {/* Duration and economy */}
-                    <div className="flex flex-col items-center text-sm">
+                    <div className="flex flex-col items-center text-[10px]">
                         <FaRegClock />
                         <p className="text-[10px] mb-0">1 hr 30 mins</p>
                         <p className="text-[10px] mb-0">Economy</p>
+                        <p className="text-[10px] mb-0">Transit in DEL</p>
                     </div>
                     {/* Arrival IATA, time, Date Airport Address */}
                     <div>
