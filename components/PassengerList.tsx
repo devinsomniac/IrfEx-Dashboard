@@ -16,7 +16,7 @@ const PassengerList = ({
     if (passengerInput.length < 9) {
       const updatedPassengers = [...passengerInput, ""];
       setPassengerInput(updatedPassengers);
-      handlePassengerlist(updatedPassengers); // Notify the parent about the updated list
+      handlePassengerlist(updatedPassengers); 
     }
   };
 
@@ -24,7 +24,7 @@ const PassengerList = ({
     const updatedPassengers = [...passengerInput];
     updatedPassengers[index] = value;
     setPassengerInput(updatedPassengers);
-    handlePassengerlist(updatedPassengers); // Notify the parent about the updated list
+    handlePassengerlist(updatedPassengers); 
   };
 
   return (
