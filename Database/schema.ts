@@ -1,7 +1,7 @@
 import { boolean, date, integer, pgTable, text, time, varchar } from "drizzle-orm/pg-core";
 
 export const pnr = pgTable('pnr', {
-    pnrinfo: text('pnrinfo').primaryKey(),
+    pnrdata: text('pnrdata').notNull(),
     dob: date('dob').notNull(),
     doj: date('doj').notNull(),
     timedep: time('timedep').notNull(),
@@ -25,14 +25,14 @@ export const passenger = pgTable('passenger', {
     passport: varchar('passport', { length: 8 }),
     visa: varchar('visa', { length: 9 }),
     visaex: date('visaex'),
-    pnr: varchar('pnr', { length: 10 }).notNull().references(() => pnr.pnrinfo),
+    pnr: varchar('pnr', { length: 10 }).notNull().references(() => pnr.pnrdata),
 });
 
 export interface Pnr {
-    pnrinfo: string;
+    pnrdata: string;
     dob: Date;
     doj: Date;
-    timedep: string; // Use string if it's in "HH:MM" format
+    timedep: string; 
     timearr: string;
     airlines: string;
     departure_name: string;

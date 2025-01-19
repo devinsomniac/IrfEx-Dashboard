@@ -12,18 +12,19 @@ import PassengerList from "@/components/PassengerList";
 import { db } from "@/Database";
 import { pnr } from "@/Database/schema";
 
+
 const Page = () => {
   const [flightDetails, setFlightDetails] = useState({
     depAir: { name: "", address: "" },
     arrAir: { name: "", address: "" },
     dob: "",
     doj: "",
-    depTime: "",
-    arrTime: "",
+    timedep: "",
+    timearr: "",
     airline: "",
     flightNo: "",
     flightDuration: "",
-    PNR: "",
+    pnrdata: "",
     cost: "",
     markup: "",
     portal: "",
@@ -38,11 +39,11 @@ const Page = () => {
   const saveToDb = async () => {
     try {
       await db.insert(pnr).values({
-        pnrinfo: flightDetails.PNR || "PNR",
+        pnrdata: flightDetails.pnrdata,
         dob: new Date(flightDetails.dob),
         doj: new Date(flightDetails.doj),
-        timedep: flightDetails.depTime,
-        timearr: flightDetails.arrTime,
+        timedep: flightDetails.timedep,
+        timearr: flightDetails.timearr,
         airlines: flightDetails.airline,
         departure_name: flightDetails.depAir.name,
         departure_address: flightDetails.depAir.address,
@@ -119,7 +120,7 @@ const Page = () => {
           </div>
           <div>
             <label className="font-bold text-gray-600">Enter the PNR</label>
-            <Input placeholder="PNR" onChange={(e) => handleChange("PNR", e.target.value)} />
+            <Input placeholder="PNR" onChange={(e) => handleChange("pnrdata", e.target.value)} />
           </div>
           <div>
             <label className="font-bold text-gray-600">Cost</label>

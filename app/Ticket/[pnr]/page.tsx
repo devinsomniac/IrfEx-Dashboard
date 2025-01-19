@@ -25,15 +25,15 @@ const page = () => {
                 <div className='flex justify-between items-center'>
                     <div className='flex items-end gap-2'>
                         <h2 className='text-2xl font-bold'>E-ticket</h2>
-                        <h2 >PNR : <span className='font-bold'>ZSEBHB</span></h2>
+                        <h2 >PNR : <span className='font-bold'>KVDC3C</span></h2>
                     </div>
                     <Image src={'/irfexlogo.png'} alt='logo' height={50} width={120} />
                 </div>
                 <Separator className='bg-gray-500 mt-2' />
                 {/* Sub heading with destinantion and arrival */}
                 <div className='flex gap-2 items-end'>
-                    <h2 className='font-bold text-[15px] mb-0 mt-0'>DHAKA to KOLKATA</h2>
-                    <h2 className="text-[10px] mt-0 mb-0">Tue, 14 jan 2025</h2>
+                    <h2 className='font-bold text-[15px] mb-0 mt-0'>DHAKA to CHENNAI</h2>
+                    <h2 className="text-[10px] mt-0 mb-0">Thu, 23 jan 2025</h2>
                 </div>
                 <Separator className='bg-gray-500 my-2' />
                 {/* Itinerary Details */}
@@ -44,28 +44,27 @@ const page = () => {
 
                         {/* Flight name number and fare type */}
                         <h2 className="mb-0">Indigo</h2>
-                        <p className="mb-0">6E 1106</p>
+                        <p className="mb-0">6E 1114</p>
                         <p className="mb-0">Fare type : Standard</p>
                     </div>
                     {/* Depurture IATA,time ,Date, Airport Address */}
                     <div>
-                        <h2 className="mb-0">DAC <span className='font-bold'>18:15</span></h2>
+                        <h2 className="mb-0">DAC <span className='font-bold'>17:25</span></h2>
                         <p className='text-gray-500 text-[10px] mb-0'>Thu, 23 Jan 2025</p>
                         <p className='text-gray-500 text-[10px] mb-0'>Dhaka - Hazrat Shahjalal International Airport</p>
                     </div>
                     {/* Duration and economy */}
                     <div className="flex flex-col items-center text-[10px]">
                         <FaRegClock />
-                        <p className="text-[10px] mb-0">1 hr 5 mins</p>
+                        <p className="text-[10px] mb-0">2 hr 50 mins</p>
                         <p className="text-[10px] mb-0">Economy</p>
                         {/* <p className="text-[10px] mb-0">Transit in DEL</p> */}
                     </div>
                     {/* Arrival IATA, time, Date Airport Address */}
                     <div>
-                        <h2 className="mb-0"><span className="font-bold ">18:50</span> CCU</h2>
+                        <h2 className="mb-0"><span className="font-bold ">19:45</span> MAA</h2>
                         <p className='text-gray-500 text-[10px] mb-0'>Thu, 23 Jan 2025</p>
-                        <p className='text-gray-500 text-[10px] mb-0'>Kolkata - Netaji Subhash Chandra Bose
-                        International Airport</p>
+                        <p className='text-gray-500 text-[10px] mb-0'>Chennai International Airport(Terminal 2)</p>
                     </div>
                 </div>
                 <Separator className='bg-gray-500 mt-2' />
@@ -83,9 +82,17 @@ const page = () => {
                             <TableRow className="mb-0">
                                 <TableCell className="mb-0 mt-0 font-bold text-[10px] flex gap-2 items-center border-r-2">
                                 <FaUserLarge />
-                                <p className="mb-0 mt-0">Mr NIRMAL KUMAR DATTA</p>
+                                <p className="mb-0 mt-0">Mr RIFATUL ISLAM BHUIYAN</p>
                                 </TableCell>
-                                <TableCell className="font-bold text-[10px] border-r-2 mb-0">ZSEBHB</TableCell>
+                                <TableCell className="font-bold text-[10px] border-r-2 mb-0">KVDC3C</TableCell>
+                                
+                            </TableRow>
+                            <TableRow className="mb-0">
+                                <TableCell className="mb-0 mt-0 font-bold text-[10px] flex gap-2 items-center border-r-2">
+                                <FaUserLarge />
+                                <p className="mb-0 mt-0">Ms MST NAZMA AKTER</p>
+                                </TableCell>
+                                <TableCell className="font-bold text-[10px] border-r-2 mb-0">KVDC3C</TableCell>
                                 
                             </TableRow>
                         </TableBody>
