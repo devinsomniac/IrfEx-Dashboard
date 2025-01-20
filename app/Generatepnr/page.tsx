@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, {  useState } from "react";
 import SelectAirlines from "@/components/SelectAirlines";
 import { SelectArrAirport } from "@/components/SelectArrAirport";
 import { SelectDepAirport } from "@/components/SelectDepAirport";
@@ -10,11 +10,14 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import PassengerList from "@/components/PassengerList";
 import { db } from "@/Database";
-import { pnr } from "@/Database/schema";
+import { passenger, pnr } from "@/Database/schema";
+import { Toaster } from "@/components/ui/sonner"
+import { toast } from "sonner"
+import { LuLoaderPinwheel } from "react-icons/lu";
 
 
 const Page = () => {
-  const [flightDetails, setFlightDetails] = useState({
+  const initialFlightDetails = {
     pnrdata: "",
     depAir: { name: "", address: "" },
     arrAir: { name: "", address: "" },
@@ -30,7 +33,9 @@ const Page = () => {
     portal: "",
     transit: { transit: false, place: "" },
     passengers: [""],
-  });
+  }
+  const [loading,setLoading] = useState(false)
+  const [flightDetails, setFlightDetails] = useState(initialFlightDetails);
   
   const handleChange = (key: string, value: any) => {
     setFlightDetails((prev) => ({ ...prev, [key]: value }));
@@ -38,7 +43,8 @@ const Page = () => {
   console.log(flightDetails)
   const saveToDb = async () => {
     try {
-      await db.insert(pnr).values({
+      setLoading(true)
+        await db.insert(pnr).values({
         pnrData: flightDetails.pnrdata,
         dob: flightDetails.dob,
         doj: flightDetails.doj,
@@ -56,12 +62,20 @@ const Page = () => {
         transitairport: flightDetails.transit.place,
         flight_number: flightDetails.flightNo,
         flight_duration: flightDetails.flightDuration,
-      
-        
       });
-      
+      for (const passengerName of flightDetails.passengers) {
+        await db.insert(passenger).values({
+          name: passengerName,
+          pnr: flightDetails.pnrdata, 
+        });
+      }
+      toast.success("PNR generated and saved to the database successfully!");
+      setFlightDetails(initialFlightDetails)
     } catch (error) {
       console.error("Error saving to database:", error);
+      toast.error("Failed to save PNR to the database. Please try again.");
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -147,10 +161,13 @@ const Page = () => {
           <PassengerList handlePassengerlist={(value) => handleChange("passengers", value)} />
         </div>
         <div className="flex justify-end">
-          <Button type="submit">Generate</Button>
+          <Button type="submit" disabled={loading}>{
+            loading ? <LuLoaderPinwheel className="animate-spin" /> : "Generate"
+            }</Button>
         </div>
       </form>
       <Image src={"/banner.png"} alt="poster" width={700} height={50} className="p-4" />
+      <Toaster />
     </div>
   );
 };
