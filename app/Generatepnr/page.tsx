@@ -15,6 +15,7 @@ import { pnr } from "@/Database/schema";
 
 const Page = () => {
   const [flightDetails, setFlightDetails] = useState({
+    pnrdata: "",
     depAir: { name: "", address: "" },
     arrAir: { name: "", address: "" },
     dob: "",
@@ -24,14 +25,13 @@ const Page = () => {
     airline: "",
     flightNo: "",
     flightDuration: "",
-    pnrdata: "",
-    cost: "",
-    markup: "",
+    cost: 0,
+    markup: 0,
     portal: "",
     transit: { transit: false, place: "" },
     passengers: [""],
   });
-
+  
   const handleChange = (key: string, value: any) => {
     setFlightDetails((prev) => ({ ...prev, [key]: value }));
   };
@@ -39,9 +39,9 @@ const Page = () => {
   const saveToDb = async () => {
     try {
       await db.insert(pnr).values({
-        pnrdata: flightDetails.pnrdata,
-        dob: new Date(flightDetails.dob),
-        doj: new Date(flightDetails.doj),
+        pnrData: flightDetails.pnrdata,
+        dob: flightDetails.dob,
+        doj: flightDetails.doj,
         timedep: flightDetails.timedep,
         timearr: flightDetails.timearr,
         airlines: flightDetails.airline,
@@ -49,14 +49,17 @@ const Page = () => {
         departure_address: flightDetails.depAir.address,
         arrival_name: flightDetails.arrAir.name,
         arrival_address: flightDetails.arrAir.address,
-        cost: parseInt(flightDetails.cost) || null,
-        markup: parseInt(flightDetails.markup) || null,
+        cost: flightDetails.cost ,
+        markup: flightDetails.markup ,
         portal: flightDetails.portal,
         transit: flightDetails.transit.transit,
-        transitairport: flightDetails.transit.place || null,
+        transitairport: flightDetails.transit.place,
         flight_number: flightDetails.flightNo,
         flight_duration: flightDetails.flightDuration,
+      
+        
       });
+      
     } catch (error) {
       console.error("Error saving to database:", error);
     }
@@ -77,9 +80,9 @@ const Page = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Image src={"/banner.png"} alt="poster" width={700} height={100} />
+      
       <h2 className="font-bold text-4xl p-3">Ticket Generator</h2>
-      <form className="p-8 border border-black rounded-lg bg-white" onSubmit={handleSubmit}>
+      <form className="p-8 shadow-2xl rounded-lg bg-white" onSubmit={handleSubmit}>
         <h3 className="font-semibold text-2xl my-1">Flight Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-4 justify-center gap-3">
           <div className="flex flex-col">
@@ -100,11 +103,11 @@ const Page = () => {
           </div>
           <div>
             <label className="font-bold text-gray-600">Enter the Time of Departure</label>
-            <Input type="time" onChange={(e) => handleChange("depTime", e.target.value)} />
+            <Input type="time" onChange={(e) => handleChange("timedep", e.target.value)} />
           </div>
           <div>
             <label className="font-bold text-gray-600">Enter the Time of Arrival</label>
-            <Input type="time" onChange={(e) => handleChange("arrTime", e.target.value)} />
+            <Input type="time" onChange={(e) => handleChange("timearr", e.target.value)} />
           </div>
           <div className="flex flex-col">
             <label className="font-bold text-gray-600">Select Airlines</label>
@@ -147,6 +150,7 @@ const Page = () => {
           <Button type="submit">Generate</Button>
         </div>
       </form>
+      <Image src={"/banner.png"} alt="poster" width={700} height={50} className="p-4" />
     </div>
   );
 };
