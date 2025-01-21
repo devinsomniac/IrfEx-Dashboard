@@ -14,26 +14,26 @@ import { passenger, pnr } from "@/Database/schema";
 import { Toaster } from "@/components/ui/sonner"
 import { toast } from "sonner"
 import { LuLoaderPinwheel } from "react-icons/lu";
-
-
+import { useRouter } from "next/navigation";
+const initialFlightDetails = {
+  pnrdata: "",
+  depAir: { name: "", address: "" },
+  arrAir: { name: "", address: "" },
+  dob: "",
+  doj: "",
+  timedep: "",
+  timearr: "",
+  airline: {airline : "",airlineImage : ""},
+  flightNo: "",
+  flightDuration: "",
+  cost: 0,
+  markup: 0,
+  portal: "",
+  transit: { transit: false, place: "" },
+  passengers: [""],
+}
 const Page = () => {
-  const initialFlightDetails = {
-    pnrdata: "",
-    depAir: { name: "", address: "" },
-    arrAir: { name: "", address: "" },
-    dob: "",
-    doj: "",
-    timedep: "",
-    timearr: "",
-    airline: "",
-    flightNo: "",
-    flightDuration: "",
-    cost: 0,
-    markup: 0,
-    portal: "",
-    transit: { transit: false, place: "" },
-    passengers: [""],
-  }
+  const router = useRouter();
   const [loading,setLoading] = useState(false)
   const [flightDetails, setFlightDetails] = useState(initialFlightDetails);
   
@@ -50,7 +50,8 @@ const Page = () => {
         doj: flightDetails.doj,
         timedep: flightDetails.timedep,
         timearr: flightDetails.timearr,
-        airlines: flightDetails.airline,
+        airlines: flightDetails.airline.airline,
+        airline_image : flightDetails.airline.airlineImage,
         departure_name: flightDetails.depAir.name,
         departure_address: flightDetails.depAir.address,
         arrival_name: flightDetails.arrAir.name,
@@ -71,6 +72,7 @@ const Page = () => {
       }
       toast.success("PNR generated and saved to the database successfully!");
       setFlightDetails(initialFlightDetails)
+      router.push(`/Ticket/${flightDetails.pnrdata}`);
     } catch (error) {
       console.error("Error saving to database:", error);
       toast.error("Failed to save PNR to the database. Please try again.");
