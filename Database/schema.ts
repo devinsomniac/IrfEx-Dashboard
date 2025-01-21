@@ -1,12 +1,13 @@
 import { boolean, date, integer, pgTable, text, time, varchar } from "drizzle-orm/pg-core";
 
 export const pnr = pgTable('pnr', {
-    pnrData: text('pnrdata').notNull(),
+    pnrData: text('pnrdata').primaryKey().notNull(),
     dob: text('dob').notNull(),
     doj: text('doj').notNull(),
     timedep: time('timedep').notNull(),
     timearr: time('timearr').notNull(),
     airlines: text('airlines').notNull(),
+    airline_image : text('airlineImage'),
     departure_name: text('departure_name').notNull(),
     departure_address: text('departure_address').notNull(),
     arrival_name: text('arrival_name').notNull(),
