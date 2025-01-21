@@ -93,9 +93,9 @@ export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport :
                         <CommandEmpty>{!loading && "No Airport Found"}</CommandEmpty>
                         <CommandGroup className="flex justify-center items-center">
                             {loading ? <AiOutlineLoading3Quarters className="animate-spin" /> :
-                                airports.map((airport) => (
+                                airports.map((airport,index) => (
                                     <CommandItem
-                                        key={airport.id}
+                                        key={index}
                                         value={airport.value}
                                         onSelect={(currentValue) => {
                                             setValue(currentValue === value ? "" : currentValue)

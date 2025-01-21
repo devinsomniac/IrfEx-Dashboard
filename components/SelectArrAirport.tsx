@@ -80,9 +80,9 @@ export function SelectArrAirport({onSelectArrAir} : {onSelectArrAir : (airport :
                     <CommandList>
                         <CommandEmpty>No framework found.</CommandEmpty>
                         <CommandGroup>
-                            {airports.map((airport) => (
+                            {airports.map((airport,index) => (
                                 <CommandItem
-                                    key={airport.id}
+                                    key={index}
                                     value={airport.value}
                                     onSelect={(currentValue) => {
                                         setValue(currentValue === value ? "" : currentValue)
