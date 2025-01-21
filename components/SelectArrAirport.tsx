@@ -26,9 +26,11 @@ type Airport = {
     label: string;
     id : number;
     address : string;
+    iata : string
   };
-export function SelectArrAirport({onSelectArrAir} : {onSelectArrAir : (airport : {name : string,address : string}) => void}) {
+export function SelectArrAirport({onSelectArrAir} : {onSelectArrAir : (airport : {name : string,address : string , iata : string}) => void}) {
     const BASE_URL = "https://airport-info.p.rapidapi.com/airport?iata="
+    const api = process.env.RAPID_API
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
     const [airports, setAirports] = React.useState<Airport[]>([])
@@ -45,7 +47,7 @@ export function SelectArrAirport({onSelectArrAir} : {onSelectArrAir : (airport :
                 }
             })
             if(!resposne){
-                throw new Error ("There hjas been an error")
+                throw new Error ("There has been an error")
             }
             const data = await resposne.json()
             setAirports([
@@ -53,7 +55,8 @@ export function SelectArrAirport({onSelectArrAir} : {onSelectArrAir : (airport :
                   value: data.iata,
                   label: data.name, 
                   id : data.id,
-                  address : data.location
+                  address : data.location,
+                  iata : data.iata
                 },
               ]);
         }
@@ -87,7 +90,7 @@ export function SelectArrAirport({onSelectArrAir} : {onSelectArrAir : (airport :
                                     onSelect={(currentValue) => {
                                         setValue(currentValue === value ? "" : currentValue)
                                         setOpen(false)
-                                        onSelectArrAir({name : airport.label,address : airport.address})
+                                        onSelectArrAir({name : airport.label,address : airport.address , iata:airport.iata})
                                     }}
                                 >
                                     {airport.label}

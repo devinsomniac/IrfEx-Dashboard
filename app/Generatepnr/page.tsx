@@ -17,8 +17,8 @@ import { LuLoaderPinwheel } from "react-icons/lu";
 import { useRouter } from "next/navigation";
 const initialFlightDetails = {
   pnrdata: "",
-  depAir: { name: "", address: "" },
-  arrAir: { name: "", address: "" },
+  depAir: { name: "", address: "" , iata : "" },
+  arrAir: { name: "", address: "" , iata : ""},
   dob: "",
   doj: "",
   timedep: "",
@@ -54,8 +54,10 @@ const Page = () => {
         airline_image : flightDetails.airline.airlineImage,
         departure_name: flightDetails.depAir.name,
         departure_address: flightDetails.depAir.address,
+        departure_iata : flightDetails.depAir.iata,
         arrival_name: flightDetails.arrAir.name,
         arrival_address: flightDetails.arrAir.address,
+        arrival_iata : flightDetails.arrAir.iata,
         cost: flightDetails.cost ,
         markup: flightDetails.markup ,
         portal: flightDetails.portal,

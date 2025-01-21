@@ -25,9 +25,10 @@ type Airport = {
     value: string;
     label: string;
     id : number;
-    Address : string
+    Address : string,
+    iata : string
 };
-export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport : {name : string,address : string}) => void}) {
+export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport : {name : string,address : string, iata : string}) => void}) {
     const BASE_URL = "https://airport-info.p.rapidapi.com/airport?iata="
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
@@ -57,7 +58,8 @@ export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport :
                         value: data.iata,
                         label: data.name,
                         id : data.id,
-                        Address : data.location
+                        Address : data.location,
+                        iata : data.iata
                     },
                 ]);
             } catch (err) {
@@ -100,7 +102,7 @@ export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport :
                                         onSelect={(currentValue) => {
                                             setValue(currentValue === value ? "" : currentValue)
                                             setOpen(false)
-                                            onSelectDepAir({name : airport.label,address : airport.Address})
+                                            onSelectDepAir({name : airport.label,address : airport.Address,iata:airport.iata})
                                         }}
                                     >
                                         {airport.label}

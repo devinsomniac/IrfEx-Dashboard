@@ -10,8 +10,10 @@ export const pnr = pgTable('pnr', {
     airline_image : text('airlineImage'),
     departure_name: text('departure_name').notNull(),
     departure_address: text('departure_address').notNull(),
+    departure_iata : text('departure_iata'),
     arrival_name: text('arrival_name').notNull(),
     arrival_address: text('arrival_address').notNull(),
+    arrival_iata : text('arrival_iata'),
     cost: integer('cost'),
     markup: integer('markup'),
     portal: text('portal'),
@@ -30,27 +32,27 @@ export const passenger = pgTable('passenger', {
 });
 
 export interface Pnr {
-    pnrdata: string;
-    dob: Date;
-    doj: Date;
-    timedep: string; 
+    pnrData: string;
+    dob: string;
+    doj: string;
+    timedep: string;
     timearr: string;
     airlines: string;
     departure_name: string;
     departure_address: string;
     arrival_name: string;
     arrival_address: string;
-    cost?: number;
-    markup?: number;
-    portal?: string;
-    transit?: boolean;
-    transitairport?: string;
+    cost: number | null; 
+    markup: number | null; 
+    portal: string | null;
+    transit: boolean | null;
+    transitairport: string | null;
     flight_number: string;
     flight_duration: string;
 }
 
 export interface Passenger {
     name: string;
-    passport?: string;
-    visa?: string;
+    passport: string | null;
+    visa: string | null;
 }
