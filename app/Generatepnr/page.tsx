@@ -90,7 +90,7 @@ const Page = () => {
 
   return (
     <div
-      className="p-12 flex flex-col items-center justify-center"
+      className="px-12 py-2 flex flex-col items-center justify-center"
       style={{
         backgroundImage: `url('/bg.jpg')`,
         backgroundSize: "cover",

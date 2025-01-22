@@ -37,7 +37,7 @@ const items = [
   },
   {
     title: "Regular Customer",
-    url: "#",
+    url: "RegCust",
     icon: <FaRegUserCircle />    ,
   },
   {

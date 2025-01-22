@@ -55,4 +55,5 @@ export interface Passenger {
     name: string;
     passport: string | null;
     visa: string | null;
+    visaex : string | null 
 }
