@@ -42,7 +42,7 @@ const items = [
   },
   {
     title: "Dashboard",
-    url: "#",
+    url: "Dashboard",
     icon: <MdDashboard />,
   },
 ]
