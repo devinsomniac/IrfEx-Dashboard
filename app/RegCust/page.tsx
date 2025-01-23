@@ -3,7 +3,7 @@ import CustomerTable from '@/components/CustomerTable'
 import { Input } from '@/components/ui/input'
 import { db } from '@/Database'
 import { passenger } from '@/Database/schema'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
 const page = () => {
   const [filterUserInput,setFilterUserInput] = useState("")
@@ -12,11 +12,11 @@ const page = () => {
   }
 
   return (
-    <div className='p-8'>
+    <div className='p-8 border m-4'>
       <div className='p-2 border w-[370]'>
         <Input className='w-[350px]' placeholder='Search by Name' onChange={handleChange}/>
       </div>
-      <div>
+      <div className='border'>
       <CustomerTable filterInput = {filterUserInput}/>
       </div>
     </div>

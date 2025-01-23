@@ -4,10 +4,11 @@ import { FcSalesPerformance } from "react-icons/fc";
 import { AiOutlineStock } from "react-icons/ai";
 import { MdAirlines } from "react-icons/md";
 import { MdAirplaneTicket } from "react-icons/md";
-import { MdPlace } from "react-icons/md";
 import { db } from '@/Database';
 import { sql } from 'drizzle-orm';
 import { pnr } from '@/Database/schema';
+import {SalesChart} from './SalesChart';
+import RecentBookingList from './RecentBookingList';
 
 const SalesReport = async () => {
   // Revenue for last 30 days
@@ -40,8 +41,8 @@ const SalesReport = async () => {
       <div className='px-5'>
           <h2 className='font-bold'>Summary Metrics</h2>
         </div>
-      <div className='flex flex-col md:flex-row p-4 gap-3'>
-        <div className='bg-slate-200 shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-2xl border border-gray-500'>
+      <div className='flex flex-col md:flex-row p-4 gap-4 justify-evenly'>
+        <div className=' shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-2xl border border-gray-500'>
           <div className=' gap-2 items-center'>
             <Image src={'/revenue.png'} alt='revenue' height={30} width={40} />
             <h2 className='font-bold text-gray-500'>Revenue Earned</h2>
@@ -52,7 +53,7 @@ const SalesReport = async () => {
           </div>
           <p className='font-bold text-sm text-gray-600'>For past 30 days</p>
         </div>
-        <div className='bg-slate-200 shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-2xl border border-gray-500'>
+        <div className=' shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-2xl border border-gray-500'>
           <div className=' gap-2 items-center'>
             <MdAirplaneTicket className='text-blue-500 text-4xl' />
             <h2 className='font-bold text-gray-500'>Tickets Sold</h2>
@@ -63,7 +64,7 @@ const SalesReport = async () => {
           </div>
           <p className='font-bold text-sm text-gray-600'>For past 30 days</p>
         </div>
-        <div className='bg-slate-200 shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-2xl border border-gray-500'>
+        <div className=' shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-2xl border border-gray-500'>
           <div className=' gap-2 items-center'>
             <MdAirlines className='text-red-600 text-4xl' />
             <h2 className='font-bold text-gray-500'>Most Used Airline</h2>
@@ -73,6 +74,14 @@ const SalesReport = async () => {
             <Image src={airline.airline_image || '/irfexlogo.png'} alt='airline logo' height={50} width={40} />
           </div>
           <p className='font-bold text-sm text-gray-600'>Uage Count {airline.usageCount}</p>
+        </div>
+      </div>
+      <div className='grid grid-cols-2 gap-2 p-4'>
+        <div>
+        <SalesChart/>
+        </div>
+        <div>
+          <RecentBookingList/>
         </div>
       </div>
     </div>
