@@ -10,7 +10,16 @@ import { pnr } from '@/Database/schema';
 import {SalesChart} from './SalesChart';
 import RecentBookingList from './RecentBookingList';
 
+
 const SalesReport = async () => {
+  const date = new Date()
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "short", 
+    day: "2-digit",   
+    month: "short",   
+    year: "numeric"   
+};
+const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
   // Revenue for last 30 days
   const revenueResult = await db.select({
     revenue: sql<number>`SUM(${pnr.cost} + ${pnr.markup})`,
@@ -40,8 +49,8 @@ const SalesReport = async () => {
 
   const salesChartResult = await db
   .select({
-    Month: sql`TO_CHAR(TO_DATE(${pnr.dob}, 'YYYY-MM-DD'), 'Month') AS month`,
-    Sales: sql`COUNT(*) AS sales`,
+    Month: sql<string>`TO_CHAR(TO_DATE(${pnr.dob}, 'YYYY-MM-DD'), 'Month') AS month`,
+    Sales: sql<number>`COUNT(*) AS sales`,
   })
   .from(pnr)
   .where(
@@ -52,26 +61,34 @@ const SalesReport = async () => {
 
 console.log(salesChartResult);
 
+const formatRevenue = (num : number) => {
+  if (num >= 1_000_000) {
+    return `${(num / 1_000_000).toFixed(1)}M`;
+  } else if (num >= 1_000) {
+    return `${(num / 1_000).toFixed(1)}K`;
+  }
+  return num.toString();
+};
 
-  console.log(salesChartResult)
   return (
     <div>
-      <div className='px-5'>
+      <div className='px-5 flex justify-between items-center'>
           <h2 className='font-bold'>Summary Metrics</h2>
+          <h2 className='p-1 bg-black text-white text-sm font-bold rounded-lg mb-2 shadow-xl'>{formattedDate}</h2>
         </div>
       <div className='flex flex-col md:flex-row p-4 gap-4 justify-evenly'>
-        <div className=' shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-2xl border border-gray-500'>
+        <div className=' shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-slate-600 border border-gray-500'>
           <div className=' gap-2 items-center'>
             <Image src={'/revenue.png'} alt='revenue' height={30} width={40} />
             <h2 className='font-bold text-gray-500'>Revenue Earned</h2>
           </div>
           <div className=' flex justify-between items-center'>
-            <h1 className='text-2xl font-bold'>BDT {revenue}</h1>
+            <h1 className='text-2xl font-bold'>BDT { formatRevenue(revenue)}</h1>
             <FcSalesPerformance className='text-4xl' />
           </div>
           <p className='font-bold text-sm text-gray-600'>For past 30 days</p>
         </div>
-        <div className=' shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-2xl border border-gray-500'>
+        <div className=' shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-slate-600 border border-gray-500'>
           <div className=' gap-2 items-center'>
             <MdAirplaneTicket className='text-blue-500 text-4xl' />
             <h2 className='font-bold text-gray-500'>Tickets Sold</h2>
@@ -82,7 +99,7 @@ console.log(salesChartResult);
           </div>
           <p className='font-bold text-sm text-gray-600'>For past 30 days</p>
         </div>
-        <div className=' shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-2xl border border-gray-500'>
+        <div className=' shadow-xl rounded-xl p-4 md:w-[300px] hover:shadow-slate-600 border border-gray-500'>
           <div className=' gap-2 items-center'>
             <MdAirlines className='text-red-600 text-4xl' />
             <h2 className='font-bold text-gray-500'>Most Used Airline</h2>
@@ -96,8 +113,8 @@ console.log(salesChartResult);
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-2 p-4'>
         <div>
-        <SalesChart/>
-        </div>
+        <SalesChart chartData={salesChartResult}/>
+        </div> 
         <div>
           <RecentBookingList/>
         </div>

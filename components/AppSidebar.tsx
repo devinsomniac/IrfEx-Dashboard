@@ -37,12 +37,12 @@ const items = [
   },
   {
     title: "Regular Customer",
-    url: "RegCust",
+    url: "/RegCust",
     icon: <FaRegUserCircle />    ,
   },
   {
     title: "Dashboard",
-    url: "Dashboard",
+    url: "/Dashboard",
     icon: <MdDashboard />,
   },
 ]
