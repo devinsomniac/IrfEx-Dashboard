@@ -22,7 +22,9 @@ import { eq } from "drizzle-orm";
 const page = async ({ params, }: { params: Promise<{ pnr: string }> }) => {
     const pnrData = (await params).pnr
     const response = await db.select().from(pnr).where(eq(pnr.pnrData, pnrData))
+    console.log(response)
     const date = new Date(response[0].doj);
+    console.log(date)
     const options: Intl.DateTimeFormatOptions = {
         weekday: "short", 
         day: "2-digit",   

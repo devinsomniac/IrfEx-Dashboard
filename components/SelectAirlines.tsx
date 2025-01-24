@@ -34,6 +34,7 @@ const SelectAirlines = ({ onSelectAirline }: { onSelectAirline: (airline: { airl
         { name: "Biman Bangladesh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3C0sfQpx4VjO9nB6U4sVw0Wsh89akYnfcPA&s" },
         { name: "US-Bangla", image: "https://bucket.barta24.com/uploads/news/2020/Jan/06/1578302889292.jpg" },
         { name: "Thai Airways", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZCWFMUEpgIymhbG8Tm1O8zCfDmiUb_x38XQ&s" },
+        { name: "Fly Scoot", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX9_QSyPzTR0x-q1c8p1D911CeTCpv7OCccg&s" },
     ];
 
     const handleSelect = (value: string) => {

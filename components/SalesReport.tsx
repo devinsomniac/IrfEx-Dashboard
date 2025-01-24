@@ -36,6 +36,24 @@ const SalesReport = async () => {
     .orderBy(sql`COUNT(${pnr.airlines}) DESC`)
     .limit(1)
   const airline = airlineResult[0]
+
+
+  const salesChartResult = await db
+  .select({
+    Month: sql`TO_CHAR(TO_DATE(${pnr.dob}, 'YYYY-MM-DD'), 'Month') AS month`,
+    Sales: sql`COUNT(*) AS sales`,
+  })
+  .from(pnr)
+  .where(
+    sql`TO_DATE(${pnr.dob}, 'YYYY-MM-DD') >= CURRENT_DATE - INTERVAL '6 months'`
+  )
+  .groupBy(sql`TO_CHAR(TO_DATE(${pnr.dob}, 'YYYY-MM-DD'), 'Month')`)
+  .orderBy(sql`MIN(TO_DATE(${pnr.dob}, 'YYYY-MM-DD'))`) 
+
+console.log(salesChartResult);
+
+
+  console.log(salesChartResult)
   return (
     <div>
       <div className='px-5'>
@@ -76,7 +94,7 @@ const SalesReport = async () => {
           <p className='font-bold text-sm text-gray-600'>Uage Count {airline.usageCount}</p>
         </div>
       </div>
-      <div className='grid grid-cols-2 gap-2 p-4'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-2 p-4'>
         <div>
         <SalesChart/>
         </div>
