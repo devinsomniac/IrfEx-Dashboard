@@ -26,14 +26,14 @@ const page = async ({ params, }: { params: Promise<{ pnr: string }> }) => {
     const date = new Date(response[0].doj);
     console.log(date)
     const options: Intl.DateTimeFormatOptions = {
-        weekday: "short", 
-        day: "2-digit",   
-        month: "short",   
-        year: "numeric"   
+        weekday: "short",
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
     };
     const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
     console.log(response)
-    const passengerList = await db.select().from(passenger).where(eq(passenger.pnr,pnrData))
+    const passengerList = await db.select().from(passenger).where(eq(passenger.pnr, pnrData))
     console.log(passengerList)
     return (
         <>
@@ -57,10 +57,10 @@ const page = async ({ params, }: { params: Promise<{ pnr: string }> }) => {
                     {/* Itinerary Details */}
                     <div className='grid grid-cols-4 p-2 items-start'>
                         {/* Airline Logo */}
-                        
-                        <div className='text-left text-[10px] text-gray-500'>
+
+                        <div className='text-left text-[10px] text-gray-500  w-[100px]'>
                             {/* Flight name number and fare type */}
-                            <Image src={response[0].airline_image || ""} height={30} width={50} alt="airline logo"/>
+                            <Image src={response[0].airline_image || ""} height={30} width={50} alt="airline logo" />
                             <h2 className="mb-0 text-black font-bold">{response[0].airlines}</h2>
                             <p className="mb-0">{response[0].flight_number}</p>
                             <p className="mb-0">Fare type : Standard</p>
@@ -72,17 +72,24 @@ const page = async ({ params, }: { params: Promise<{ pnr: string }> }) => {
                             <p className='text-gray-500 text-[10px] mb-0'>{response[0].departure_name} - {response[0].departure_address}</p>
                         </div>
                         {/* Duration and economy */}
-                        <div className="flex flex-col items-center text-[10px]">
+                        <div className="flex flex-col items-center text-[10px] ">
                             <FaRegClock />
-                            <p className="text-[10px] mb-0">{response[0].flight_duration}</p>
-                            <p className="text-[10px] mb-0">Economy</p>
-                            {/* <p className="text-[10px] mb-0">Transit in DEL</p> */}
+                            <p className="text-[10px] mb-0 font-bold">{response[0].flight_duration}</p>
+                            <p className="text-[10px] mb-0 text-gray-500">Economy</p>
+                            {response[0].transit ? (
+                                <>
+                                <p className="text-[10px] text-center mb-0 text-gray-500">Transit at </p>
+                                <p className="text-center text-gray-500">{response[0].transitairport}</p>
+                                </>
+                            ) : (
+                                <p className="text-[10px] text-center mb-0">Direct Flight</p>
+                            )}
                         </div>
                         {/* Arrival IATA, time, Date Airport Address */}
-                        <div>
-                            <h2 className="mb-0"><span className="font-bold ">{response[0].timearr.split(":").slice(0,2).join(":")}</span> {response[0].arrival_iata}</h2>
+                        <div className="text-right">
+                            <h2 className="mb-0"><span className="font-bold ">{response[0].timearr.split(":").slice(0, 2).join(":")}</span> {response[0].arrival_iata}</h2>
                             <p className='text-gray-500 text-[10px] mb-0'>{formattedDate}</p>
-                            <p className='text-gray-500 text-[10px] mb-0'>{response[0].arrival_name} - {response[0].arrival_address}</p>
+                            <p className='text-gray-500 text-[10px] mb-0 '>{response[0].arrival_name} - {response[0].arrival_address}</p>
                         </div>
                     </div>
                     <Separator className='bg-gray-500 mt-2' />
@@ -97,15 +104,15 @@ const page = async ({ params, }: { params: Promise<{ pnr: string }> }) => {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {passengerList.map((passengerName,index) => (
-                                <TableRow className="mb-0" key={index}>
-                                <TableCell className="mb-0 mt-0 font-bold text-[10px] flex gap-2 items-center border-r-2">
-                                    <FaUserLarge />
-                                    <p className="mb-0 mt-0">{passengerName.name}</p>
-                                </TableCell>
-                                <TableCell className="font-bold text-[10px] border-r-2 mb-0">{passengerName.pnr}</TableCell>
+                                {passengerList.map((passengerName, index) => (
+                                    <TableRow className="mb-0" key={index}>
+                                        <TableCell className="mb-0 mt-0 font-bold text-[10px] flex gap-2 items-center border-r-2">
+                                            <FaUserLarge />
+                                            <p className="mb-0 mt-0">{passengerName.name}</p>
+                                        </TableCell>
+                                        <TableCell className="font-bold text-[10px] border-r-2 mb-0">{passengerName.pnr}</TableCell>
 
-                            </TableRow>
+                                    </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
