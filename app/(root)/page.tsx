@@ -1,19 +1,25 @@
-"use client"
-import BookingTable from "@/components/BookingTable";
-import PnrSearchForm from "@/components/PnrSearchForm";
-import { useState } from "react";
+import { Button } from '@/components/ui/button'
+import { SignedOut, SignInButton} from '@clerk/nextjs'
+import Image from 'next/image'
+import React from 'react'
+import { FcGoogle } from "react-icons/fc";
 
-
-export default function Home() {
-  const [filterInput,setFilterInput] = useState("")
+const page = () => {
   return (
-    <div className="p-8">
+    <div className='bg-slate-300 flex flex-col justify-center items-center gap-3 h-[100vh]'>
       <div>
-      <PnrSearchForm onFilterInput = {setFilterInput}/>
+    <Image src={'/LoginForm.jpg'} alt='banner login' width={800} height={50}/>
       </div>
-      <div className="border my-2 h-[600px] overflow-y-auto">
-        <BookingTable filterInput = {filterInput}/>
+      <div>
+      <SignedOut>
+          <SignInButton>
+          <Button className='bg-slate-200 text-black border border-gray-400'>Sign in With Google <FcGoogle />
+          </Button>
+            </SignInButton> 
+        </SignedOut>
       </div>
     </div>
-  );
+  )
 }
+
+export default page

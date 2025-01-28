@@ -17,17 +17,11 @@ import {
 } from "@/components/ui/sidebar"
 import { NavUser } from "./nav-user";
 
-const data = {
-    user: {
-      name: "shadcn",
-      email: "m@example.com",
-      avatar: "https://github.com/shadcn.png",
-    },
-}
+
 const items = [
   {
     title: "Bookings",
-    url: "/",
+    url: "/Bookings",
     icon: <IoTicketSharp />    ,
   },
   {
@@ -70,7 +64,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="bg-slate-300">
-        <NavUser user={data.user}/>
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   )
