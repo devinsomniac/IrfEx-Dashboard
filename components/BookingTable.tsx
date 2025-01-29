@@ -49,36 +49,36 @@ const BookingTable = ({ filterInput }: { filterInput: string }) => {
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader className="sticky">
-          <TableRow className="py-2">
-            <TableHead className="font-bold text-black">PNR</TableHead>
-            <TableHead className="font-bold text-black">Date of Booking</TableHead>
-            <TableHead className="font-bold text-black">Date of Journey</TableHead>
-            <TableHead className="font-bold text-black">Departure Airport</TableHead>
-            <TableHead className="font-bold text-black">Arrival Airport</TableHead>
-            <TableHead className="font-bold text-black">Flight Number</TableHead>
-            <TableHead className="font-bold text-black">Costing</TableHead>
-            <TableHead className="font-bold text-black">Markup</TableHead>
-            <TableHead className="font-bold text-black">Portal</TableHead>
-            <TableHead className="font-bold text-black">Passenger</TableHead>
+          <TableRow className="py-2 text-xs font-semibold">
+            <TableHead >PNR</TableHead>
+            <TableHead className="w-[150px]">Date of Booking</TableHead>
+            <TableHead className="w-[150px]">Date of Journey</TableHead>
+            <TableHead className="w-[150px]">Departure Airport</TableHead>
+            <TableHead className="w-[150px]">Arrival Airport</TableHead>
+            <TableHead className="w-[150px]">Flight Number</TableHead>
+            <TableHead className="w-[150px]">Costing</TableHead>
+            <TableHead className="w-[150px]">Markup</TableHead>
+            <TableHead className="w-[150px]">Portal</TableHead>
+            <TableHead className="w-[150px]">Passenger</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {filteredResponse.map((passengerDetail, index) => (
-            <TableRow key={index} className="hover:bg-slate-200">
-              <TableCell className="font-medium underline">
+            <TableRow key={index} className="hover:bg-slate-200 text-sm">
+              <TableCell className="font-medium underline text-xs">
                 <Link href={`/Ticket/${passengerDetail.pnr.pnrData}`}>
                   {passengerDetail.pnr.pnrData}
                 </Link>
               </TableCell>
-              <TableCell>{passengerDetail.pnr.dob}</TableCell>
-              <TableCell>{passengerDetail.pnr.doj}</TableCell>
-              <TableCell>{passengerDetail.pnr.departure_address}</TableCell>
-              <TableCell>{passengerDetail.pnr.arrival_address}</TableCell>
-              <TableCell>{passengerDetail.pnr.flight_number}</TableCell>
-              <TableCell>{passengerDetail.pnr.cost ?? "N/A"}</TableCell>
-              <TableCell>{passengerDetail.pnr.markup ?? "N/A"}</TableCell>
-              <TableCell>{passengerDetail.pnr.portal ?? "N/A"}</TableCell>
-              <TableCell>{passengerDetail.passenger.name}</TableCell>
+              <TableCell >{passengerDetail.pnr.dob}</TableCell>
+              <TableCell >{passengerDetail.pnr.doj}</TableCell>
+              <TableCell >{passengerDetail.pnr.departure_address}</TableCell>
+              <TableCell >{passengerDetail.pnr.arrival_address}</TableCell>
+              <TableCell >{passengerDetail.pnr.flight_number}</TableCell>
+              <TableCell >{passengerDetail.pnr.cost ?? "N/A"}</TableCell>
+              <TableCell >{passengerDetail.pnr.markup ?? "N/A"}</TableCell>
+              <TableCell >{passengerDetail.pnr.portal ?? "N/A"}</TableCell>
+              <TableCell >{passengerDetail.passenger.name}</TableCell>
             </TableRow>
           ))}
         </TableBody>

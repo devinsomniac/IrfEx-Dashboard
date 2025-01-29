@@ -11,7 +11,7 @@ export default function Home() {
       <div>
       <PnrSearchForm onFilterInput = {setFilterInput}/>
       </div>
-      <div className="border my-2 h-[600px] overflow-y-auto">
+      <div className="border my-2 h-[600px] overflow-y-auto overflow-x-auto">
         <BookingTable filterInput = {filterInput}/>
       </div>
     </div>

@@ -17,6 +17,16 @@ import {
 } from "@/components/ui/sidebar"
 import { NavUser } from "./nav-user";
 
+type userType = {
+  name: string,
+    email: string,
+    avatar: string,
+}
+  const user : userType = {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+}
 
 const items = [
   {
@@ -64,8 +74,9 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="bg-slate-300">
-        <NavUser />
+        <NavUser user = {user} />
       </SidebarFooter>
     </Sidebar>
   )
 }
+
