@@ -1,12 +1,10 @@
 "use client"
 import CustomerTable from '@/components/CustomerTable'
 import { Input } from '@/components/ui/input'
-import { db } from '@/Database'
-import { passenger } from '@/Database/schema'
 import React, { ChangeEvent, useState } from 'react'
 
 const page = () => {
-  const [filterUserInput,setFilterUserInput] = useState("")
+  const [filterUserInput,setFilterUserInput] = React.useState("")
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFilterUserInput(e.target.value)
   }

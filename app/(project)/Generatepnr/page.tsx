@@ -37,7 +37,7 @@ const Page = () => {
   const [loading,setLoading] = useState(false)
   const [flightDetails, setFlightDetails] = useState(initialFlightDetails);
   
-  const handleChange = (key: string, value: any) => {
+  const handleChange = (key: string, value: string | number | boolean | object) => {
     setFlightDetails((prev) => ({ ...prev, [key]: value }));
   };
   console.log(flightDetails)
