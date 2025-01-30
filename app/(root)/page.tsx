@@ -1,4 +1,4 @@
-import { signIn } from '@/auth';
+import { auth, signIn } from '@/auth';
 import { Button } from '@/components/ui/button'
 
 import Image from 'next/image'
@@ -6,7 +6,11 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 import { FcGoogle } from "react-icons/fc";
 
-const page = () => {
+const page = async() => {
+  const session = await auth()
+  if(session){
+    redirect("/Bookings")
+  }
   return (
     <div className='bg-slate-300 flex flex-col justify-center items-center gap-3 h-[100vh]'>
       <div>
