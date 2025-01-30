@@ -103,6 +103,7 @@ http://localhost:3000/api/auth/callback/google (dev)
 ![Alt text](/public/profit.png)
 
 - ** Authentication
+
 ![Alt text](/public/auth.png)
 
 
