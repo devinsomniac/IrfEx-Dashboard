@@ -9,6 +9,7 @@ const allowedUsers = [
     "rozysultana1977@gmail.com",
     "rozysultana19777@gmail.com",
     "chowdhuryirfan36@gmail.com",
+    "mdjahidhossain268329@gmail.com"
 ];
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
