@@ -93,17 +93,17 @@ http://localhost:3000/api/auth/callback/google (dev)
 ## Main Features
 - **/bookings: Manage all bookings
 
-![Alt text](/booking.png)
+![Alt text](/public/booking.png)
 
 - **/generate-pnr: Create group booking tickets
-![Alt text](/generate.png)
+![Alt text](/public/generate.png)
 
 - **/dashboard: View sales & profit analytics
-![Alt text](/sales.png)
-![Alt text](/profit.png)
+![Alt text](/public/sales.png)
+![Alt text](/public/profit.png)
 
 - ** Authentication
-![Alt text](/auth.png)
+![Alt text](/public/auth.png)
 
 
 
