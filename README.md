@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Travel Agency Management Dashboard
 
-## Getting Started
+A comprehensive management dashboard for travel agencies to handle bookings, customers, and business analytics.
 
-First, run the development server:
+## Features
 
+### 📖 Bookings Management
+- View all bookings with details (PNR, journey date, booking date, passenger name, portal, airports, flight details, costing)
+- Track booking sources and financial metrics
+- Search/filter bookings by various parameters
+
+### 🎫 PNR Generation System
+- Generate PNRs for group bookings
+- Custom ticket creation interface
+- Download generated tickets (PDF/HTML)
+
+### 👥 Customer Management
+- Maintain customer database with travel documents
+- Store passport/visa details with expiry dates
+- Quick access to customer travel history
+
+### 📊 Analytics Dashboard
+**Sales Tab**
+- 30-day revenue & tickets sold
+- Most used airlines
+- 6-month sales chart
+- Recent bookings list
+
+**Profit Tab**
+- 30-day net profit & margin
+- Most visited destinations
+- 6-month profit chart
+- Airlines ticket distribution radar
+
+## Technologies Used
+- **Framework**: Next.js (App Router)
+- **Authentication**: NextAuth with Google OAuth
+- **Styling**: Tailwind CSS
+- **Database**: PostgreSQL + Drizzle ORM
+- **Hosting**: Neon.tech (Serverless PostgreSQL)
+- **APIs**: RapidAPI (Airport data)
+- **UI Components**: Shadcn + Custom components
+
+## Installation
+
+1. Clone the repository
+   ```bash
+   git clone [https://github.com/devinsomniac/IrfEx-Dashboard]
+   ```
+2. Install dependencies
+    ```bash
+   npm install
+   ```
+3. Set up environment variables (create .env file):
+    ```bash
+    DATABASE_URL=your_neon_connection_string
+    NEXTAUTH_SECRET=your_secret_key
+    GOOGLE_CLIENT_ID=your_google_oauth_id
+    GOOGLE_CLIENT_SECRET=your_google_oauth_secret
+    RAPIDAPI_KEY=your_rapidapi_key
+   ```
+4. Run database migrations
+    ```bash
+   npx drizzle-kit push
+   ```
+5. Start development server
+    ```bash
+    npm run dev
+    ```   
+## Configuration
+- **Required Environment Variables
+- **DATABASE_URL: Neon.tech PostgreSQL connection string
+- **NEXTAUTH_URL: Base URL of your application
+- **NEXTAUTH_SECRET: Random secret for session encryption
+- **GOOGLE_CLIENT_ID: Google OAuth client ID
+- **GOOGLE_CLIENT_SECRET: Google OAuth client secret
+- **RAPIDAPI_KEY: Key for RapidAPI airport data
+
+## Authentication Setup
+- **Enable Google OAuth in Google Cloud Console
+- **Add authorized redirect URIs:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+http://localhost:3000/api/auth/callback/google (dev)
+```
+```
+[production-domain]/api/auth/callback/google
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
+- **Access Control
+- **Only pre-authorized users can login
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Main Features
+- **/bookings: Manage all bookings
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![Alt text](/booking.png)
 
-## Learn More
+- **/generate-pnr: Create group booking tickets
+![Alt text](/generate.png)
 
-To learn more about Next.js, take a look at the following resources:
+- **/dashboard: View sales & profit analytics
+![Alt text](/sales.png)
+![Alt text](/profit.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- ** Authentication
+![Alt text](/auth.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Acknowledgments
+- **Airport data provided by RapidAPI
+- **UI components using Shadcn
+- **Database powered by Neon.tech
