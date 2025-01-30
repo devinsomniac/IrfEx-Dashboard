@@ -8,8 +8,7 @@ import { Button } from "@/components/ui/button"
 import {
     Command,
     CommandEmpty,
-    CommandGroup,
-    CommandInput, 
+    CommandGroup, 
     CommandItem,
     CommandList,
 } from "@/components/ui/command"
@@ -30,6 +29,7 @@ type Airport = {
 };
 export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport : {name : string,address : string, iata : string}) => void}) {
     const BASE_URL = "https://airport-info.p.rapidapi.com/airport?iata="
+    const api = process.env.NEXT_PUBLIC_RAPID_API
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
     const [airports, setAirports] = React.useState<Airport[]>([])
@@ -45,7 +45,7 @@ export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport :
                 const resposne = await fetch(`${BASE_URL}${userInput}`, {
                     method: "GET",
                     headers: {
-                        'x-rapidapi-key': 'aecacb131amsha3ba44f12a43c06p1fdd0djsn7fa0df85e770',
+                        'x-rapidapi-key': api as string,
                         'x-rapidapi-host': 'airport-info.p.rapidapi.com'
                     }
                 })
