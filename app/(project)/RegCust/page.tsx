@@ -1,9 +1,9 @@
 "use client"
 import CustomerTable from '@/components/CustomerTable'
 import { Input } from '@/components/ui/input'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent } from 'react'
 
-const page = () => {
+const Page = () => {
   const [filterUserInput,setFilterUserInput] = React.useState("")
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFilterUserInput(e.target.value)
@@ -21,4 +21,4 @@ const page = () => {
   )
 }
 
-export default page 
+export default Page 

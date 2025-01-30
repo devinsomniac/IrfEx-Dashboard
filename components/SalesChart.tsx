@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/chart"
 type Sales = {
   Month : string,
-  Sales : Number 
+  Sales : number 
  }
 
 const chartConfig = {

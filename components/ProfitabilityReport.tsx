@@ -8,7 +8,7 @@ import { TbRouteAltLeft } from "react-icons/tb";
 import { ProfitChart } from './ProfitChart';
 import { ProfitByAirlines } from './ProfitByAirlines';
 import { db } from '@/Database';
-import { desc, sql } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 import { pnr } from '@/Database/schema';
 
 type ProfitChartData = {

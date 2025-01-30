@@ -1,6 +1,6 @@
 import { db } from '@/Database';
 import { passenger, pnr } from '@/Database/schema';
-import { desc, eq, sql } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';

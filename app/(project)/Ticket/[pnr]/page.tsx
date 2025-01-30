@@ -125,14 +125,14 @@ const page = async ({ params, }: { params: Promise<{ pnr: string }> }) => {
                         <h2 className="font-bold">Please Note:</h2>
                         <ul className="list-disc ml-4 text-[8px] text-gray-600">
                             <li className="pt-1 mb-0">Check-in Timing: Please arrive at the airport at least 2-3 hours prior to departure for international flights and 1-2 hours for domestic flights.</li>
-                            <li className="pt-1 mb-0">Baggage Allowance: Ensure your luggage complies with the airline's baggage policy. Additional charges may apply for excess baggage.</li>
+                            <li className="pt-1 mb-0">Baggage Allowance: Ensure your luggage complies with the airlines baggage policy. Additional charges may apply for excess baggage.</li>
                             <li className="pt-1 mb-0">Valid Identification: Carry a valid government-issued photo ID or passport for verification at check-in and boarding.</li>
                             <li className="pt-1 mb-0">Prohibited Items: Review the list of prohibited items for both carry-on and checked baggage to ensure compliance with security regulations.</li>
                             <li className="pt-1 mb-0">Boarding Pass: Keep your boarding pass handy throughout your journey. You may need it for security checks and boarding the flight.</li>
                             <li className="pt-1 mb-0">Electronic Devices: Switch off or enable flight mode on all electronic devices during the flight as instructed by the cabin crew.</li>
                             <li className="pt-1 mb-0">Gate Closure: Boarding gates typically close 20-30 minutes before the scheduled departure time. Late arrivals may not be allowed to board.</li>
                             <li className="pt-1 mb-0">Health & Safety: Follow all health and safety guidelines provided by the airline and airport authorities, including wearing a mask if required.</li>
-                            <li className="pt-1 mb-0">Emergency Contact: Keep the airline's customer service number and emergency contacts accessible for assistance during your journey.</li>
+                            <li className="pt-1 mb-0">Emergency Contact: Keep the airlines customer service number and emergency contacts accessible for assistance during your journey.</li>
                         </ul>
                     </div>
                     {/* Fare Breakup */}

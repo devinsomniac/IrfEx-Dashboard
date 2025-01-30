@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Select,
     SelectContent,
@@ -13,11 +13,6 @@ type Airline = {
 };
 
 const SelectAirlines = ({ onSelectAirline }: { onSelectAirline: (airline: { airline: string; airline_image: string }) => void }) => {
-    const [airline, setAirline] = useState<{ airline: string; airline_image: string }>({
-        airline: "",
-        airline_image: "",
-    });
-
     const airlines: Airline[] = [
         { name: "Indigo", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLIEyJ-EYgoHpuFHPKfA4Qr4BqkDChWRbjsQ&s" },
         { name: "Air India", image: "https://www.airport-suppliers.com/wp-content/uploads/2023/08/image001.png" },
@@ -35,18 +30,15 @@ const SelectAirlines = ({ onSelectAirline }: { onSelectAirline: (airline: { airl
         { name: "US-Bangla", image: "https://bucket.barta24.com/uploads/news/2020/Jan/06/1578302889292.jpg" },
         { name: "Thai Airways", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZCWFMUEpgIymhbG8Tm1O8zCfDmiUb_x38XQ&s" },
         { name: "Fly Scoot", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX9_QSyPzTR0x-q1c8p1D911CeTCpv7OCccg&s" },
-        
     ];
 
     const handleSelect = (value: string) => {
         const selectedAirline = airlines.find((airline) => airline.name === value);
         if (selectedAirline) {
-            const newAirline = {
+            onSelectAirline({
                 airline: selectedAirline.name,
                 airline_image: selectedAirline.image,
-            };
-            setAirline(newAirline);
-            onSelectAirline(newAirline);
+            });
         }
     };
 
