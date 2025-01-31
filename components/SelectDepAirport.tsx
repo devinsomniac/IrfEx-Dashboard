@@ -35,7 +35,7 @@ export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport :
     const [airports, setAirports] = React.useState<Airport[]>([])
     const [userInput, setUserInput] = React.useState("")
     const [loading, setLoading] = React.useState(false)
-    console.log(api)
+    console.log("The api is : ",api)
 
     React.useEffect(() => {
 
