@@ -34,15 +34,26 @@ export function SelectArrAirport({onSelectArrAir} : {onSelectArrAir : (airport :
     const [value, setValue] = React.useState("")
     const [airports, setAirports] = React.useState<Airport[]>([])
     const [userInput,setUserInput] = React.useState("")
+    const debouncedInput = useDebounce(userInput,500)
 
-
+    function useDebounce(value: string, delay: number) {
+        const [debouncedValue, setDebouncedValue] = React.useState(value);
+      
+        React.useEffect(() => {
+          const handler = setTimeout(() => setDebouncedValue(value), delay);
+          return () => clearTimeout(handler);
+        }, [value, delay]);
+      
+        return debouncedValue;
+      }
     React.useEffect(() => {
         const fetchAirportDetails = async() => {
             const resposne = await fetch(`${BASE_URL}${userInput}`,{
                 method:"GET",
                 headers: {
                     'x-rapidapi-key': api,
-                    'x-rapidapi-host': 'airport-info.p.rapidapi.com'
+                    'x-rapidapi-host': 'airport-info.p.rapidapi.com',
+                    'Content-Type': 'application/json'
                 }
             })
             if(!resposne){
@@ -59,8 +70,11 @@ export function SelectArrAirport({onSelectArrAir} : {onSelectArrAir : (airport :
                 },
               ]);
         }
-        fetchAirportDetails()
-    },[userInput])
+        if (debouncedInput.length >= 3) { // Minimum 3 characters
+            fetchAirportDetails()
+          }
+        
+    },[debouncedInput])
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
