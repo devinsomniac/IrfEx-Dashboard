@@ -40,7 +40,7 @@ export function SelectDepAirport({ onSelectDepAir }: { onSelectDepAir: (airport:
         const fetchAirportDetails = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`${window.location.origin}/api/getairport?iata=${userInput}`);
+                const response = await fetch(`/api/getairport?iata=${userInput}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch airport data");
                 }

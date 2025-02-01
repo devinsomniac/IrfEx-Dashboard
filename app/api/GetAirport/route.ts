@@ -3,7 +3,8 @@ const BASE_URL = "https://airport-info.p.rapidapi.com/airport?iata="
 const api = process.env.RAPID_API!
 export const GET = async(req:NextRequest):Promise<NextResponse> => {
     try{
-        const iata = req.nextUrl.searchParams.get("iata"); 
+        const { searchParams } = new URL(req.url);
+        const iata = searchParams.get("iata");
         if (!iata) {
             return NextResponse.json({ error: "IATA code is required" }, { status: 400 });
         }
