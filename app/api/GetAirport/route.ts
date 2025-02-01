@@ -14,12 +14,19 @@ export const GET = async(req:NextRequest):Promise<NextResponse> => {
                 'x-rapidapi-host': 'airport-info.p.rapidapi.com',
             }
         })
+        
         if (!response.ok) {
             throw new Error("There has been an error")
         }
         const data = await response.json();
+        const headers = new Headers();
+        headers.append("Access-Control-Allow-Origin", "*");  
+        headers.append("Access-Control-Allow-Methods", "GET, OPTIONS");
+        headers.append("Access-Control-Allow-Headers", "Content-Type");
         console.log("API Response:", data);
-        return NextResponse.json(data); 
+        return NextResponse.json(data, { headers });
+        
+         
     }catch(err){
         console.log("There has been an error in fetching airport",err)
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
