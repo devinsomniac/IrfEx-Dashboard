@@ -61,7 +61,7 @@ export function SelectArrAirport({ onSelectArrAir }: { onSelectArrAir: (airport:
             }
         };
 
-        if(userInput.length ==3){
+        if(userInput.length === 3){
             fetchAirportDetails();
         }
     }, [userInput]);

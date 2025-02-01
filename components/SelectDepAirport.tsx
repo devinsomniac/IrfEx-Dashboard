@@ -61,7 +61,7 @@ export function SelectDepAirport({ onSelectDepAir }: { onSelectDepAir: (airport:
             }
         };
 
-        if(userInput.length ==3){
+        if(userInput.length === 3){
             fetchAirportDetails();
         }
     }, [userInput]);
