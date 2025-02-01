@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 const BASE_URL = "https://airport-info.p.rapidapi.com/airport?iata="
 const api = process.env.RAPID_API!
-export const GET = async(req:NextRequest) => {
+export const GET = async(req:NextRequest):Promise<NextResponse> => {
     try{
         const iata = req.nextUrl.searchParams.get("iata"); 
         if (!iata) {
@@ -12,7 +12,6 @@ export const GET = async(req:NextRequest) => {
             headers: {
                 'x-rapidapi-key': api,
                 'x-rapidapi-host': 'airport-info.p.rapidapi.com',
-                'Content-Type': 'application/json'
             }
         })
         if (!response.ok) {
