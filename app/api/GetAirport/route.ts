@@ -18,6 +18,7 @@ export const GET = async(req:NextRequest):Promise<NextResponse> => {
             throw new Error("There has been an error")
         }
         const data = await response.json();
+        console.log("API Response:", data);
         return NextResponse.json(data); 
     }catch(err){
         console.log("There has been an error in fetching airport",err)
