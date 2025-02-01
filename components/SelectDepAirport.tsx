@@ -19,57 +19,53 @@ import {
 } from "@/components/ui/popover"
 import { Input } from "./ui/input"
 
-
 type Airport = {
     value: string;
     label: string;
-    id : number;
-    Address : string,
-    iata : string
+    id: number;
+    address: string;
+    iata: string;
 };
-export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport : {name : string,address : string, iata : string}) => void}) {
-    const BASE_URL = "https://airport-info.p.rapidapi.com/airport?iata="
-    const api = process.env.NEXT_PUBLIC_RAPID_API!
-    const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("")
-    const [airports, setAirports] = React.useState<Airport[]>([])
-    const [userInput, setUserInput] = React.useState("")
-    const [loading, setLoading] = React.useState(false)
-    console.log("The api is : ",api)
+
+export function SelectDepAirport({ onSelectDepAir }: { onSelectDepAir: (airport: { name: string; address: string; iata: string }) => void }) {
+    const [open, setOpen] = React.useState(false);
+    const [value, setValue] = React.useState("");
+    const [airports, setAirports] = React.useState<Airport[]>([]);
+    const [userInput, setUserInput] = React.useState("");
+    const [loading, setLoading] = React.useState(false);
 
     React.useEffect(() => {
+        if (!userInput) return; 
 
         const fetchAirportDetails = async () => {
             try {
-                setLoading(true)
-                const resposne = await fetch(`${BASE_URL}${userInput}`, {
-                    method: "GET",
-                    headers: {
-                        'x-rapidapi-key': api,
-                        'x-rapidapi-host': 'airport-info.p.rapidapi.com'
-                    }
-                })
-                if (!resposne) {
-                    throw new Error("There hjas been an error")
+                setLoading(true);
+                const response = await fetch(`/api/GetAirport?iata=${userInput}`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch airport data");
                 }
-                const data = await resposne.json()
+                const data = await response.json();
                 setAirports([
                     {
                         value: data.iata,
                         label: data.name,
-                        id : data.id,
-                        Address : data.location,
-                        iata : data.iata
-                    },
+                        id: data.id,
+                        address: data.location,
+                        iata: data.iata
+                    }
                 ]);
             } catch (err) {
-                console.log("There hs been error", err)
+                console.error("Error fetching airport data:", err);
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
+        };
+
+        if(userInput.length ==3){
+            fetchAirportDetails();
         }
-        fetchAirportDetails()
-    }, [userInput])
+    }, [userInput]);
+
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -87,39 +83,49 @@ export function SelectDepAirport({onSelectDepAir} : {onSelectDepAir : (airport :
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
                 <Command>
-                    <Input placeholder="Search For Airport" className="h-9" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserInput(e.target.value)} />
+                    <Input
+                        placeholder="Search For Airport"
+                        className="h-9"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserInput(e.target.value)}
+                    />
                     <CommandList>
-                        
-                        {userInput && 
-                        <>
-                        <CommandEmpty>{!loading && "No Airport Found"}</CommandEmpty>
-                        <CommandGroup className="flex justify-center items-center">
-                            {loading ? <AiOutlineLoading3Quarters className="animate-spin" /> :
-                                airports.map((airport,index) => (
-                                    <CommandItem
-                                        key={index}
-                                        value={airport.value}
-                                        onSelect={(currentValue) => {
-                                            setValue(currentValue === value ? "" : currentValue)
-                                            setOpen(false)
-                                            onSelectDepAir({name : airport.label,address : airport.Address,iata:airport.iata})
-                                        }}
-                                    >
-                                        {airport.label}
-                                        <Check
-                                            className={cn(
-                                                "ml-auto",
-                                                value === airport.value ? "opacity-100" : "opacity-0"
-                                            )}
-                                        />
-                                    </CommandItem>
-                                ))}
-                        </CommandGroup>
-                        </>
-                        }
+                        {userInput && (
+                            <>
+                                <CommandEmpty>{!loading && "No Airport Found"}</CommandEmpty>
+                                <CommandGroup className="flex justify-center items-center">
+                                    {loading ? (
+                                        <AiOutlineLoading3Quarters className="animate-spin" />
+                                    ) : (
+                                        airports.map((airport, index) => (
+                                            <CommandItem
+                                                key={index}
+                                                value={airport.value}
+                                                onSelect={(currentValue) => {
+                                                    setValue(currentValue === value ? "" : currentValue);
+                                                    setOpen(false);
+                                                    onSelectDepAir({
+                                                        name: airport.label,
+                                                        address: airport.address,
+                                                        iata: airport.iata
+                                                    });
+                                                }}
+                                            >
+                                                {airport.label}
+                                                <Check
+                                                    className={cn(
+                                                        "ml-auto",
+                                                        value === airport.value ? "opacity-100" : "opacity-0"
+                                                    )}
+                                                />
+                                            </CommandItem>
+                                        ))
+                                    )}
+                                </CommandGroup>
+                            </>
+                        )}
                     </CommandList>
                 </Command>
             </PopoverContent>
         </Popover>
-    )
+    );
 }
