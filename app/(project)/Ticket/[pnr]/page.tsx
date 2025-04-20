@@ -44,7 +44,7 @@ const page = async ({ params, }: { params: Promise<{ pnr: string }> }) => {
                             <h2 className='text-2xl font-bold'>E-ticket</h2>
                             <h2 >PNR : <span className='font-bold'>{response[0].pnrData}</span></h2>
                         </div>
-                        <Image src={'/irfexlogo.png'} alt='logo' height={50} width={120} />
+                        <Image src={'/logo.png'} alt='logo' height={50} width={120} />
                     </div>
                     <Separator className='bg-gray-500 mt-2' />
                     {/* Sub heading with destinantion and arrival */}
